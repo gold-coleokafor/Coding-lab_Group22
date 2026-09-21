@@ -1,5 +1,16 @@
 #!/bin/bash
 
+water_audit() {
+    echo "Running water usage audit..."
+
+    average=$(grep "ICU_WATER_RESERVE" active_logs/water_usage_log.log | \
+    awk -F' \\| ' '{sum += $3; count++} END {if (count > 0) print sum/count; else print 0}')
+
+    printf "ICU Water Reserve Audit\n"
+    printf "%s\n" "------------------------"
+    printf "Average Usage: %.2f Liters/min\n" "$average"
+}
+
 process_vitals() {
     echo "Scanning for critical patient vitals..."
 
@@ -15,3 +26,4 @@ process_vitals() {
 }
 
 process_vitals
+water_audit
