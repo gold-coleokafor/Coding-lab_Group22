@@ -1,5 +1,7 @@
 #!/bin/bash
-
+# hospital_analysis.sh
+# Analyzes hospital sensor logs: flags critical patient vitals
+# and audits ICU water usage.
 water_audit() {
     echo "Running water usage audit..."
 
@@ -21,6 +23,10 @@ process_vitals() {
 
     grep "CRITICAL" active_logs/temperature_log.log | \
     awk -F' \\| ' '{print $1, "|", $2, "|", $3}' >> reports/critical_alerts.txt
+
+    if [ ! -s reports/critical_alerts.txt ]; then
+        echo "No critical alerts found." >> reports/critical_alerts.txt
+    fi
 
     echo "Critical alerts saved to reports/critical_alerts.txt"
 }
