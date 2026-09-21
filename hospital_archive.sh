@@ -1,4 +1,4 @@
-!/bin/bash 
+#!/bin/bash 
 
 archiving_files() {
         echo "Starting log archiving"
