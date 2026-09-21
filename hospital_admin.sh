@@ -6,3 +6,22 @@ secure_data() {
 	ls -l -d active_logs
 	# 700 = owner has read/write/execute, group and others have no access
 } 
+
+
+# hospital_admin.sh - Script 1: Permissions & Setup
+# Member 1 (The Architect): initialize_system()
+
+initialize_system() {
+    echo "Initializing hospital system..."
+
+    for dir in active_logs archived_logs reports; do
+        if [ -d "$dir" ]; then
+            echo "$dir directory already exists."
+        else
+            echo "Creating $dir directory..."
+            mkdir -p "$dir"
+        fi
+    done
+
+    echo "System initialization complete."
+}
