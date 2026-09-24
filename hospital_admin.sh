@@ -15,6 +15,8 @@ initialize_system() {
 	echo "System initialization complete."
 }
 
+#Secure data permissions
+
 secure_data() {
 	echo "Securing active_logs directory..."
 	chmod 700 active_logs
@@ -22,3 +24,10 @@ secure_data() {
 	ls -l -d active_logs
 	# 700 = owner has read/write/execute, group and others have no access
 } 
+
+
+# Orchestrator and execution
+initialize_system
+secure_data
+
+echo "System Environment Secured on $(date)"
